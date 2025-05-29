@@ -224,12 +224,32 @@ To improve performance, especially when processing large corpora or repeatedly a
 - Why it matters: Without caching, signature extraction would re-read and re-process all known author files for every mystery text. With caching, we compute once and reuse, resulting in significant speed-up.
 - Where it's used: Inside the get_all_signatures() and process_data() functions, where known author texts are read and analyzed.
 
-
 ### 📌 Notes
 
 - Ensure UTF-8 encoding for all text files.
 - Empty strings and whitespace-only content are safely handled.
 - You can adjust the weights for better tuning depending on the dataset.
+
+
+### ⚠️ Challenges
+Some challenges we faced during development:
+
+- Determining optimal weights for new features
+
+  Assigning meaningful weights manually was challenging. Ideally, this would be automated using machine learning or statistical techniques for better accuracy.
+
+- Performance impact of POS tagging
+
+  Part-of-speech tagging added significant runtime overhead. We had to optimize these functions and make their use optional for practical performance.
+  
+- Scalability for larger datasets and author pools
+
+  To support more authors and larger corpora, additional performance improvements (e.g., batching, parallelization, persistent caching) may be necessary.
+
+- Extracting more relevant features
+
+  Identifying and engineering stylometric features that meaningfully contribute to author discrimination is non-trivial and requires careful linguistic and statistical insight.
+
 
 ### 📌 Future Enhancements
 
